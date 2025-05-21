@@ -62,7 +62,7 @@ Full-Scale Road Trip Planning Tools.
 Internationalization & Localization for Global Reach.
 Our overarching goal is to establish Vibe as the premier platform for discovering, creating, and participating in authentic, shared real-world experiences that enrich lives and foster meaningful connections.
 
-🌱 Support Vibe's Journey (Example Crowdfunding Appeal)
+🌱 Support Vibe's Journey 
 Vibe is driven by a passion for connecting people and fostering vibrant communities. This functional PoC demonstrates the core experience we aim to deliver. To evolve Vibe into the full-featured, global platform envisioned—complete with a scalable backend, the innovative Vibe Map, secure systems, and a thriving user base—we are seeking support.
 
 Your contribution can help turn this vision into a reality, building a tool that genuinely enhances how people connect and experience the world around them.
