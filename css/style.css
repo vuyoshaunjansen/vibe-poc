@@ -1,0 +1,841 @@
+/* Basic Reset & Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* Light Mode (Default) */
+    --bg-primary: #ffffff;
+    --bg-secondary: #f4f7f6;
+    --bg-accent: #E3FCF9; 
+    --text-primary: #1c1c1e; 
+    --text-secondary: #555555;
+    --accent-primary: #4a89ac; 
+    --accent-secondary: #3b6e8a; 
+    --border-color: #dddddd;
+    --card-shadow: rgba(0,0,0,0.08);
+    --danger-red: #e74c3c;
+    --success-green: #2ecc71;
+    --link-color: var(--accent-primary);
+    --header-height: 60px;
+}
+
+body.dark-mode {
+    --bg-primary: #1c1c1e; 
+    --bg-secondary: #121212; 
+    --bg-accent: #2a5c74; 
+    --text-primary: #f0f0f0; 
+    --text-secondary: #aaaaaa;
+    --accent-primary: #5dade2; 
+    --accent-secondary: #7bc0e8;
+    --border-color: #3a3a3c; 
+    --card-shadow: rgba(0,0,0,0.4); 
+    --link-color: var(--accent-primary);
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    line-height: 1.6;
+    transition: background-color 0.3s, color 0.3s;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Header & Navigation */
+#appHeader {
+    background-color: var(--bg-primary);
+    padding: 0 15px; 
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid var(--border-color);
+    box-shadow: 0 1px 3px var(--card-shadow); 
+    height: var(--header-height); 
+}
+
+.header-left {
+    flex: 1 0 auto; /* Allow to grow/shrink but has a base size */
+    display: flex;
+    align-items: center;
+}
+#appLogo {
+    height: 30px; 
+    display: block; 
+}
+body.dark-mode #appLogo {
+     filter: brightness(0) invert(1); 
+}
+
+#mainNav {
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    height: 100%;
+    flex-grow: 1; /* Allow nav to take available space */
+    overflow-x: auto; 
+    -webkit-overflow-scrolling: touch; 
+}
+
+#mainNav .nav-button {
+    background: none;
+    border: none;
+    color: var(--text-secondary); 
+    font-size: 0.7rem; 
+    margin: 0 1px; /* Reduced margin to fit more */
+    cursor: pointer;
+    padding: 6px; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    line-height: 1.1;
+    border-radius: 4px;
+    min-width: 50px; 
+    height: calc(var(--header-height) - 12px); 
+    text-align: center;
+    transition: color 0.2s, background-color 0.2s;
+}
+
+#mainNav .nav-button i {
+    font-size: 1.2rem; 
+    margin-bottom: 2px;
+}
+
+#mainNav .nav-button:hover, 
+#mainNav .nav-button.active {
+    color: var(--accent-primary);
+    background-color: var(--bg-accent);
+}
+
+.header-right {
+    flex: 1 0 auto; /* Allow to grow/shrink but has a base size */
+    display: flex;
+    justify-content: flex-end; 
+    align-items: center;
+    gap: 5px; 
+}
+#themeToggle, 
+#viewToggle {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 1.2rem; 
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 4px;
+}
+#themeToggle:hover, 
+#viewToggle:hover {
+    color: var(--accent-primary);
+    background-color: var(--bg-accent);
+}
+
+/* Main Content Area */
+#appContent {
+    padding: 20px 10px; 
+    flex-grow: 1; 
+}
+
+/* Feed Page specific styling */
+body.mobile-view #feedPage {
+    max-width: 600px; 
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0; 
+}
+body.mobile-view .event-post {
+    margin-bottom: 10px; 
+    border-radius: 8px; 
+    border-left: 1px solid var(--border-color); 
+    border-right: 1px solid var(--border-color);
+}
+
+/* Desktop View Specifics */
+body.desktop-view #feedPage {
+    max-width: 1200px; 
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+    gap: 20px;
+}
+body.desktop-view .event-post {
+    margin-bottom: 0; 
+    border-radius: 8px; 
+}
+body.desktop-view .post-image-container {
+    aspect-ratio: 16 / 10; 
+}
+
+
+/* Event Post Styling (Common) */
+.event-post {
+    background-color: var(--bg-primary);
+    border-bottom: 1px solid var(--border-color); 
+    box-shadow: 0 2px 8px var(--card-shadow);
+    overflow: hidden;
+}
+
+.post-header {
+    display: flex;
+    align-items: center;
+    padding: 10px 12px; 
+    gap: 10px;
+    cursor: pointer; 
+}
+.post-header:hover .host-name {
+    color: var(--accent-primary);
+}
+
+.host-avatar {
+    width: 36px; 
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid var(--border-color);
+}
+
+.host-name {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--text-primary);
+    transition: color 0.2s;
+}
+
+.post-image-container {
+    width: 100%;
+    background-color: var(--bg-secondary); 
+    /* aspect-ratio handled by mobile/desktop specific styles or default below */
+    aspect-ratio: 9 / 11; /* Default mobile-ish aspect ratio */
+    overflow: hidden;
+    position: relative; 
+}
+
+.post-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.post-content {
+    padding: 10px 15px;
+}
+
+.post-title {
+    font-size: 1.2rem; 
+    font-weight: bold;
+    color: var(--accent-primary);
+    margin-bottom: 6px;
+}
+
+.post-datetime {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.post-datetime i {
+    font-size: 0.9em;
+}
+
+.post-caption { 
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    margin-bottom: 10px;
+    line-height: 1.45;
+    white-space: pre-line; 
+}
+
+.post-actions {
+    display: flex;
+    justify-content: space-around; 
+    padding: 5px 15px 10px; 
+    border-top: 1px solid var(--border-color);
+}
+
+.post-action-button {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 1.2rem; 
+    cursor: pointer;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: color 0.2s, transform 0.1s ease-out;
+}
+.post-action-button span { 
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+.post-action-button:hover {
+    color: var(--accent-primary);
+}
+.post-action-button:active {
+    transform: scale(0.95);
+}
+.post-action-button.active .fa-heart { 
+    color: var(--danger-red); 
+}
+.post-action-button.joined .fa-check-circle { 
+    color: var(--success-green); 
+}
+.post-action-button.view-chat-btn .fa-comment-dots {
+    color: var(--accent-primary);
+}
+
+
+/* Details Dropdown */
+.post-details-toggle {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    cursor: pointer;
+    display: block; 
+    margin-bottom: 10px;
+    padding: 5px 0;
+    font-weight: 500;
+}
+.post-details-toggle:hover {
+    color: var(--accent-primary);
+}
+.post-details-toggle i {
+    margin-right: 5px;
+    transition: transform 0.2s ease-in-out;
+}
+.post-details-toggle.open i {
+    transform: rotate(90deg);
+}
+
+.post-details-content {
+    font-size: 0.85rem; 
+    padding: 10px;
+    background-color: var(--bg-secondary);
+    border-radius: 6px;
+    margin-top: 5px;
+    border: 1px solid var(--border-color);
+}
+.post-details-content p {
+    margin-bottom: 5px;
+}
+.post-details-content strong {
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+/* Comment Section */
+.post-comments-section { 
+    padding: 0 15px 15px 15px;
+}
+.post-comments-placeholder {
+    font-size: 0.85rem;
+    padding: 10px;
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    background-color: var(--bg-secondary);
+    margin-top: 10px;
+}
+.post-comments-placeholder h4 {
+    color: var(--text-primary);
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+}
+.post-comments-placeholder .comment-list { /* Added wrapper for comments */
+    max-height: 150px; /* Limit height and make scrollable if many comments */
+    overflow-y: auto;
+}
+.post-comments-placeholder .comment-item {
+    margin-bottom: 8px;
+    padding-bottom: 5px;
+    border-bottom: 1px dotted var(--border-color);
+    font-size: 0.8rem; /* Consistent comment text size */
+}
+.post-comments-placeholder .comment-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+.post-comments-placeholder .comment-item strong { 
+    color: var(--text-primary);
+    cursor: pointer;
+}
+.post-comments-placeholder .comment-item strong:hover {
+    text-decoration: underline;
+    color: var(--accent-primary);
+}
+
+.comment-input-area {
+    display: flex;
+    margin-top: 10px;
+    gap: 8px;
+}
+.comment-input-area input.comment-input {
+    flex-grow: 1;
+    padding: 8px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    background-color: var(--bg-primary); 
+    color: var(--text-primary);
+    font-size: 0.85rem;
+}
+.comment-input-area input.comment-input:focus {
+    outline: none;
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent-primary) 20%, transparent);
+}
+.comment-input-area button.submit-comment-btn {
+    background-color: var(--accent-primary);
+    color: var(--text-white);
+    border: none;
+    padding: 0 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: background-color 0.2s;
+}
+.comment-input-area button.submit-comment-btn:hover {
+    background-color: var(--accent-secondary);
+}
+
+
+/* Generic Page View & Back Button */
+.page-view {
+    padding: 15px; /* Consistent padding for page views */
+    background-color: var(--bg-primary); /* Page views get primary bg */
+    border-radius: 8px; /* Rounded corners for page views if not feed */
+    margin: 0 auto; /* Center page views */
+    max-width: 800px; /* Max width for non-feed pages */
+}
+#feedPage.page-view { /* Feed specific overrides */
+    background-color: transparent; /* Feed itself doesn't have a card bg */
+    border-radius: 0;
+    padding: 0; /* Feed padding handled by appContent */
+    box-shadow: none;
+    border: none;
+}
+
+.page-view > h2, .page-view > h3 { 
+    font-size: 1.6rem; 
+    margin-top: 0; /* Remove top margin from page titles if padding is on page-view */
+    color: var(--text-primary); 
+    text-align: center;
+    margin-bottom: 25px; /* More space after title */
+}
+
+.back-button {
+    background-color: transparent;
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
+    padding: 8px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px; 
+    margin-bottom: 20px;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+.back-button:hover {
+    background-color: var(--bg-accent);
+    color: var(--accent-primary);
+    border-color: var(--accent-primary);
+}
+
+
+/* Profile Detail Page */
+#profileDetailPage {
+    max-width: 700px;
+    text-align: center;
+}
+.profile-detail-header {
+    margin-bottom: 25px;
+}
+#detailProfilePic {
+    width: 100px; 
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--accent-primary);
+    margin-bottom: 10px;
+}
+#detailProfileName {
+    font-size: 1.8rem;
+    color: var(--text-primary);
+    margin-bottom: 5px;
+}
+#detailProfileFriendStatus {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    margin-bottom: 15px;
+}
+#connectFriendButton { 
+    background-color: var(--accent-primary);
+    color: var(--text-white);
+    padding: 8px 20px;
+    border:none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+#connectFriendButton.connected {
+    background-color: var(--success-green);
+}
+#connectFriendButton.hidden {
+    display: none;
+}
+
+
+.profile-detail-content h3 {
+    font-size: 1.3rem;
+    color: var(--accent-primary);
+    margin-bottom: 15px;
+    border-top: 1px solid var(--border-color);
+    padding-top: 20px;
+}
+.profile-event-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); 
+    gap: 15px;
+}
+.profile-event-grid .event-card { 
+    max-width: none; 
+    box-shadow: 0 2px 6px var(--card-shadow);
+}
+.profile-event-grid .event-card-image {
+    height: 130px;
+    aspect-ratio: 16/9; 
+}
+.profile-event-grid .event-card-title {
+    font-size: 1rem;
+}
+.profile-event-grid .event-card-info {
+    padding: 10px;
+}
+.profile-event-grid .event-card-description, 
+.profile-event-grid .event-card-actions,
+.profile-event-grid .host-info { 
+    display: none;
+}
+
+
+/* Create Event Page (Mock Form) */
+#createEventPage {
+    max-width: 600px;
+}
+.mock-form-container {
+    background-color: var(--bg-primary);
+    padding: 25px;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 12px var(--card-shadow);
+}
+.mock-form-container p {
+    text-align: center;
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    margin-bottom: 20px;
+}
+.mock-form-container input[type="text"],
+.mock-form-container input[type="datetime-local"],
+.mock-form-container textarea {
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-size: 1rem;
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+}
+.mock-form-container textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+.mock-form-container .post-vibe-btn { 
+    background-color: var(--accent-primary);
+    color: var(--text-white);
+    display: block;
+    width: 100%;
+    padding: 12px;
+    font-size: 1.1rem;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+}
+.mock-form-container .post-vibe-btn:hover {
+    background-color: var(--accent-secondary);
+}
+
+/* All Chats Page */
+#allChatsPage {
+    max-width: 600px;
+}
+#chatListContainer .chat-list-item {
+    background-color: var(--bg-primary);
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    border: 1px solid var(--border-color);
+    cursor: pointer;
+    transition: background-color 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+#chatListContainer .chat-list-item:hover {
+    background-color: var(--bg-accent);
+}
+#chatListContainer .chat-list-item img.chat-item-avatar { 
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+#chatListContainer .chat-list-item div { 
+    flex-grow: 1;
+}
+#chatListContainer .chat-list-item h4 {
+    color: var(--accent-primary);
+    margin-bottom: 3px;
+    font-size: 1.05rem;
+}
+#chatListContainer .chat-list-item p {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+#chatListContainer .no-chats-message {
+    text-align: center;
+    padding: 20px;
+    color: var(--text-secondary);
+    font-style: italic;
+}
+
+
+/* My Profile Page */
+#myProfilePage {
+    max-width: 600px;
+}
+#myProfileDetails {
+    background-color: var(--bg-primary);
+    padding: 25px;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 2px 8px var(--card-shadow);
+    text-align: center;
+}
+#myProfileDetails img.my-profile-pic { 
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+    border: 3px solid var(--accent-primary);
+}
+#myProfileDetails p {
+    margin-bottom: 12px;
+    font-size: 1.05rem;
+    color: var(--text-primary);
+}
+#myProfileDetails strong {
+    color: var(--accent-primary);
+    font-weight: 600;
+}
+#myProfileDetails ul {
+    list-style: none;
+    padding-left: 0;
+    text-align: left;
+    max-width: 400px;
+    margin: 0 auto 15px auto;
+}
+#myProfileDetails ul li {
+    padding: 5px 0;
+    border-bottom: 1px dotted var(--border-color);
+}
+#myProfileDetails ul li:last-child {
+    border-bottom: none;
+}
+#myProfileDetails .action-button { 
+    margin-top: 20px;
+    background-color: var(--accent-primary);
+    color: var(--text-white);
+    border:none;
+}
+
+/* Chat Page Specifics */
+#chatPage {
+    max-width: 600px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background-color: var(--bg-primary);
+    padding: 20px;
+    box-shadow: 0 5px 15px var(--card-shadow);
+}
+.chat-messages {
+    height: 350px;
+    overflow-y: auto;
+    border: 1px solid var(--border-color);
+    padding: 15px;
+    margin-bottom: 15px;
+    background-color: var(--bg-secondary); 
+    border-radius: 6px;
+}
+.chat-message { 
+    padding: 8px 12px;
+    margin-bottom: 10px;
+    border-radius: 15px;
+    max-width: 75%;
+    word-wrap: break-word;
+    display: flex; /* For avatar in chat */
+    flex-direction: column;
+}
+.chat-message.user-message { 
+    background-color: var(--accent-primary);
+    color: var(--text-white);
+    margin-left: auto;
+    border-bottom-right-radius: 5px;
+    align-items: flex-end;
+}
+.chat-message.other-message { 
+    background-color: var(--bg-accent); 
+    color: var(--text-primary);
+    margin-right: auto;
+    border-bottom-left-radius: 5px;
+    align-items: flex-start;
+}
+.chat-message strong { /* Sender name */
+    display: block;
+    font-size: 0.8rem;
+    margin-bottom: 3px;
+    opacity: 0.8;
+    cursor: pointer;
+}
+.chat-message strong:hover {
+    text-decoration: underline;
+}
+.chat-message p { /* Message text */
+    margin: 0;
+}
+.chat-input-area {
+    display: flex;
+    gap: 10px;
+}
+.chat-input-area input {
+    flex-grow: 1;
+    padding: 12px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 25px;
+    font-size: 1rem;
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+}
+.comment-input-area input.comment-input:focus, /* Apply also to chat input */
+.chat-input-area input:focus {
+    outline: none;
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent-primary) 20%, transparent);
+}
+.chat-input-area button {
+    background-color: var(--accent-primary);
+    color: var(--text-white);
+    border: none;
+    width: 50px; 
+    height: 50px; 
+    border-radius: 50%;
+    font-size: 1.3rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s;
+}
+.chat-input-area button:hover {
+    background-color: var(--accent-secondary);
+}
+
+
+/* Calendar Page Placeholder */
+#calendarPage {
+    text-align: center;
+    padding: 30px;
+    background-color: var(--bg-primary);
+    border-radius: 8px;
+}
+
+
+/* Footer */
+#appFooter {
+    background-color: var(--bg-primary);
+    color: var(--text-secondary);
+    text-align: center;
+    padding: 25px 15px;
+    font-size: 0.8rem; 
+    border-top: 1px solid var(--border-color);
+    margin-top: auto; 
+}
+#appFooter p {
+    margin-bottom: 5px;
+}
+#appFooter .app-goal {
+    font-size: 0.75rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.4;
+    opacity: 0.8;
+}
+
+
+/* Utility for hiding/showing pages */
+.hidden {
+    display: none !important;
+}
+
+/* Small screen adjustments */
+@media (max-width: 700px) { 
+    #mainNav .nav-button span {
+        display: none; 
+    }
+    #mainNav .nav-button i {
+        font-size: 1.3rem; /* Adjusted icon size */
+    }
+     #mainNav .nav-button {
+        min-width: auto; 
+        padding: 8px 4px; /* Adjusted padding */
+        margin: 0; 
+    }
+     #appHeader {
+        padding: 0 8px; 
+        height: 56px;
+    }
+    #appLogo {
+        height: 28px;
+    }
+    body.mobile-view #feedPage { 
+        padding-left: 0px; 
+        padding-right: 0px;
+        gap: 0; 
+    }
+    body.mobile-view .event-post {
+        border-radius: 0; 
+        border-left: none;
+        border-right: none;
+        margin-bottom: 8px; 
+    }
+    #appContent { 
+        padding: 10px 0 0 0; 
+    }
+}

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vibe PoC - Final Iteration++</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="light-mode mobile-view"> {/* Default classes applied by JS */}
+    <header id="appHeader">
+        <div class="header-left">
+            <img src="assets/images/logo/vibe_logo.png" alt="Vibe Logo" id="appLogo">
+        </div>
+        <nav id="mainNav">
+            <button id="navFeed" class="nav-button active" aria-label="Feed"><i class="fas fa-home"></i> <span>Feed</span></button>
+            <button id="navExplore" class="nav-button" aria-label="Explore"><i class="fas fa-compass"></i> <span>Explore</span></button>
+            <button id="navCalendar" class="nav-button" aria-label="Calendar"><i class="fas fa-calendar-alt"></i> <span>Calendar</span></button>
+            <button id="navCreateVibe" class="nav-button" aria-label="Create Vibe"><i class="fas fa-plus-circle"></i> <span>Create</span></button>
+            <button id="navChats" class="nav-button" aria-label="Chats"><i class="fas fa-comment-dots"></i> <span>Chats</span></button>
+            <button id="navMyProfile" class="nav-button" aria-label="My Profile"><i class="fas fa-user-circle"></i> <span>Me</span></button>
+        </nav>
+        <div class="header-right">
+            <button id="viewToggle" aria-label="Toggle View Mode"><i class="fas fa-desktop"></i></button>
+            <button id="themeToggle" aria-label="Toggle Theme"><i class="fas fa-moon"></i></button>
+        </div>
+    </header>
+
+    <main id="appContent">
+        <div id="feedPage" class="page-view">
+            </div>
+
+        <div id="profileDetailPage" class="page-view hidden">
+            <button id="backButtonFromProfileDetail" class="back-button"><i class="fas fa-arrow-left"></i> Back</button>
+            <div class="profile-detail-header">
+                <img src="" alt="Profile Picture" id="detailProfilePic">
+                <h2 id="detailProfileName"></h2>
+                <p id="detailProfileFriendStatus"></p>
+                <button id="connectFriendButton" class="action-button hidden"><i class="fas fa-user-plus"></i> Connect</button>
+            </div>
+            <div class="profile-detail-content">
+                <h3>Vibes Hosted by <span class="profile-name-placeholder">User</span>:</h3>
+                <div id="detailProfileHostedEvents" class="profile-event-grid"></div>
+            </div>
+        </div>
+
+        <div id="createEventPage" class="page-view hidden">
+            <button id="backButtonFromCreate" class="back-button"><i class="fas fa-arrow-left"></i> Back</button>
+            <h2>Create Your Vibe!</h2>
+            <div class="mock-form-container">
+                <p>Share your next adventure or gathering...</p>
+                <input type="text" placeholder="Vibe Title (e.g., Sunset Beach Bonfire)">
+                <textarea placeholder="Description: What's the plan? What to bring?"></textarea>
+                <input type="text" placeholder="Location (e.g., Muizenberg Beach)">
+                <input type="datetime-local" id="vibeDateTime">
+                <button class="action-button post-vibe-btn">Post Vibe (Mock)</button>
+            </div>
+        </div>
+        
+        <div id="allChatsPage" class="page-view hidden">
+            <button id="backButtonFromAllChats" class="back-button"><i class="fas fa-arrow-left"></i> Back</button>
+            <h2>Your Vibe Chats</h2>
+            <div id="chatListContainer"></div>
+        </div>
+
+        <div id="chatPage" class="page-view hidden"> 
+            <button id="backButtonForChat" class="back-button"><i class="fas fa-arrow-left"></i> Back</button>
+            <h3>Group Chat: <span id="chatEventName"></span></h3>
+            <div class="chat-messages"></div>
+            <div class="chat-input-area">
+                <input type="text" id="chatMessageInput" placeholder="Type a message...">
+                <button id="sendChatMessageButton"><i class="fas fa-paper-plane"></i></button>
+            </div>
+        </div>
+
+        <div id="myProfilePage" class="page-view hidden"> 
+             <button id="backButtonFromMyProfile" class="back-button"><i class="fas fa-arrow-left"></i> Back</button>
+            <h2>My Profile</h2>
+            <div id="myProfileDetails"></div>
+        </div>
+
+        <div id="calendarPage" class="page-view hidden">
+            <button id="backButtonFromCalendar" class="back-button"><i class="fas fa-arrow-left"></i> Back</button>
+            <h2>Your Vibe Calendar (Mock)</h2>
+            <p style="text-align: center; padding: 20px; color: var(--text-secondary);">
+                Imagine a beautiful calendar here, showing all your upcoming joined Vibes and interesting events!
+                <br><br> (This feature is planned for the future.)
+            </p>
+        </div>
+    </main>
+
+    <footer id="appFooter">
+        <p>Vibe PoC - Designed by Vuyo</p>
+        <p class="app-goal">Core Mission: To empower individuals worldwide to spontaneously or intentionally connect with like-minded people through shared activities and experiences, fostering genuine connections and memorable moments.</p>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
